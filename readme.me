@@ -1,0 +1,205 @@
+Here's a **README.md** file that you can use for your GitHub repository.  
+
+---
+
+# **Car Management API**  
+
+This project provides a **Car Management API** that allows authentication, storing car details, and uploading car images.  
+
+## **Features**  
+✅ **User Authentication** (JWT-based)  
+✅ **Store Car Details** (Unique 10-digit car ID)  
+✅ **Upload Car Images** (Organized storage)  
+
+---
+
+## **API Endpoints**  
+
+### **1. Authentication API**  
+
+#### **Endpoint:**  
+`POST /api/auth/login`  
+
+#### **Request:**  
+```json
+{
+    "email": "user@example.com",
+    "password": "yourpassword"
+}
+```
+
+#### **Response:**  
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI...",
+    "expires_in": "7 days",
+    "username": "JohnDoe"
+}
+```
+
+---
+
+### **2. Store Car Details API**  
+
+#### **Endpoint:**  
+`POST /api/cars/store`  
+
+#### **Request:**  
+```json
+{
+    "NameA": "Arabic Car name",
+    "NameE": "English Car Name",
+    "DescriptionNameA": "<p>Car description in Arabic...</p>",
+    "DescriptionNameE": "<p>Car description in English...</p>",
+    "vehicleBody": "001",
+    "vehModel": "001001",
+    "carColor": "WHITE",
+    "drive_type": "4WD",
+    "transmission": "auto",
+    "doorList": "4",
+    "cylinder": "4",
+    "fuelType": "NO",
+    "condition": "NO",
+    "forWomen": "NO",
+    "specialOffer": "NO",
+    "available": "YES",
+    "sendNotification": "NO",
+    "safetyFeaturesList": "16,17",
+    "specificationsList": "1,2",
+    "videoLink": "https://example.com/video",
+    "attachmentLink": "https://example.com/attachment"
+}
+```
+
+#### **Response:**  
+```json
+{
+    "message": "Car details stored successfully",
+    "carId": "1234567890"
+}
+```
+
+---
+
+### **3. Upload Car Images API**  
+
+#### **Endpoint:**  
+`POST /api/cars/upload-images/{carId}`  
+
+#### **Request (Multipart-Form Data):**  
+```json
+{
+    "bannerImage": [File],
+    "images": [File, File, File]
+}
+```
+
+#### **Response:**  
+```json
+{
+    "message": "Images uploaded successfully",
+    "bannerImagePath": "/uploads/cars/1234567890/banner/banner.jpg",
+    "imagesPaths": [
+        "/uploads/cars/1234567890/images/image1.jpg",
+        "/uploads/cars/1234567890/images/image2.jpg"
+    ]
+}
+```
+
+---
+
+## **Database Schema**  
+
+### **`cars` Table:**  
+| Column Name         | Data Type       | Description |
+|---------------------|---------------|-------------|
+| `id`               | BIGINT (10) | Unique 10-digit car ID |
+| `NameA`            | VARCHAR(255) | Arabic car name |
+| `NameE`            | VARCHAR(255) | English car name |
+| `DescriptionNameA` | TEXT | Arabic description |
+| `DescriptionNameE` | TEXT | English description |
+| `vehicleBody`      | VARCHAR(10) | Body type |
+| `vehModel`        | VARCHAR(10) | Model |
+| `carColor`        | VARCHAR(50) | Color |
+| `drive_type`      | VARCHAR(10) | Drive type |
+| `transmission`    | VARCHAR(10) | Transmission type |
+| `doorList`        | INT(2) | Number of doors |
+| `cylinder`        | INT(2) | Number of cylinders |
+| `fuelType`        | VARCHAR(5) | Fuel type |
+| `condition`       | VARCHAR(5) | Condition |
+| `forWomen`        | VARCHAR(5) | For women |
+| `specialOffer`    | VARCHAR(5) | Special offer |
+| `available`       | VARCHAR(5) | Availability |
+| `sendNotification` | VARCHAR(5) | Send notification |
+| `safetyFeaturesList` | VARCHAR(255) | Safety features IDs (comma-separated) |
+| `specificationsList` | VARCHAR(255) | Specifications IDs (comma-separated) |
+| `videoLink`       | VARCHAR(500) | Video link |
+| `attachmentLink`  | VARCHAR(500) | Attachment link |
+
+### **`car_images` Table:**  
+| Column Name  | Data Type | Description |
+|-------------|-----------|-------------|
+| `id`        | BIGINT | Auto-increment ID |
+| `carId`     | BIGINT | Foreign key (cars.id) |
+| `imageType` | VARCHAR(10) | `banner` or `image` |
+| `imagePath` | VARCHAR(500) | File path |
+
+---
+
+## **Storage Structure**  
+```
+/uploads/cars/{carId}/
+    ├── banner/
+    │   └── banner.jpg
+    ├── images/
+    │   ├── image1.jpg
+    │   ├── image2.jpg
+```
+
+---
+
+## **Installation & Setup**  
+
+### **1. Clone the Repository**  
+```sh
+git clone https://github.com/yourusername/car-management-api.git
+cd car-management-api
+```
+
+### **2. Install Dependencies**  
+```sh
+npm install  # For Node.js projects
+pip install -r requirements.txt  # For Python projects
+```
+
+### **3. Set Up Database**  
+- Import the provided SQL schema  
+- Configure your database credentials in `.env`
+
+### **4. Start the Server**  
+```sh
+npm start  # Node.js
+python app.py  # Python
+```
+
+---
+
+## **Authentication**  
+All API requests (except login) require a **Bearer Token** in the header:  
+```sh
+Authorization: Bearer <JWT_TOKEN>
+```
+
+---
+
+## **Contributing**  
+Contributions are welcome! Please fork the repo and submit a pull request.  
+
+---
+
+## **License**  
+This project is licensed under the **MIT License**.  
+
+---
+
+This README should be perfect for your GitHub repository! 🎯🚀 Let me know if you need any modifications.
